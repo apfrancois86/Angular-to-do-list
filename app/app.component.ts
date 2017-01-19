@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     <h1>To Do List for {{month}}/{{day}}/{{year}}</h1>
     <h3>{{currentFocus}}</h3>
     <ul>
-      <li *ngFor="let currentTask of tasks">{{currentTask.description}}</li>
+      <li (click)="isDone(currentTask)" *ngFor="let currentTask of tasks">{{currentTask.description}} <button (click)="editTask()">Edit!</button></li>
     </ul>
   </div>
   `
@@ -20,10 +20,20 @@ export class AppComponent {
   day: number = this.currentTime.getDate();
   year: number = this.currentTime.getFullYear();
   tasks: Task[] = [
-    new Task("Finish weekend Angular homework for Epicodus course"),
+    new Task('Finish weekend Angular homework for Epicodus course'),
     new Task('Begin brainstorming possible JavaScript group projects'),
     new Task('Add README file to last few Angular repos on GitHub')
   ];
+  editTask() {
+    alert('You just requested to edit a Task!');
+  }
+  isDone(clickedTask: Task) {
+    if(clickedTask.done === true) {
+      alert('this task is done!');
+    } else {
+      alert('This task is NOT done. DO IT NOW!')
+    }
+  }
 }
 
 
